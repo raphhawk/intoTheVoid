@@ -2,6 +2,11 @@ st - simple terminal
 --------------------
 st is a simple terminal emulator for X which sucks less.
 
+Applied Patches
+---------------
+spaceDuck colorscheme
+st-scrollback (ctrl+shift+up/down) keyboard only
+st-dynamic-cursor-color
 
 Requirements
 ------------
