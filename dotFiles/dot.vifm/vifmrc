@@ -1,0 +1,113 @@
+colorscheme onedark
+
+" Pdf
+filetype *.pdf zathura %f,apvlv %f,xpdf %f
+fileview *.pdf pdftotext -nopgbrk %c -
+
+" PostScript
+filextype *.ps,*.ps.gz gv %c %i &
+
+" Djvu
+filextype *.djvu zathura %f
+filextype *.djvu apvlv %f
+
+" Audio
+filetype *.wav,*.mp3,*.flac,*.ogg,*.m4a
+       "\ {Play using ffplay}
+       "\ ffplay %c,
+       "\ {Play using MPlayer}
+       "\ mplayer %f,
+       "\ {Play using MPV}
+       \ mpv %f,
+fileviewer *.mp3 mp3info
+
+" Video
+filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob,*.flv
+        "\ {View using ffplay}
+        "\ vlc %c,
+        "\ {View using ffplay}
+        "\ ffplay -fs %c,
+        "\ {View using Dragon}
+        "\ dragon %f,
+        "\ {View using mplayer}
+        "\ mplayer %f,
+        \ {View using mpv}
+        \ mpv %f,
+fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.vob
+         \ ffprobe -pretty %c 2>&1
+
+" Web
+filetype *.html,*.htm links,mozilla,uzbl-browser %f %i &
+
+" Object
+filetype *.o nm %f | less
+
+" Image
+filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
+        \ {View in sxiv}
+        \ sxiv,
+        \ {View in gpicview}
+        \ gpicview %c,
+        \ {View in feh}
+        \ feh --draw-filename --draw-actions --scale-down --geometry 1380x768 %c,
+fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm convert -identify %f -verbose /dev/null
+
+" MD5
+filetype *.md5
+       \ {Check MD5 hash sum}
+       \ md5sum -c %f,
+
+" FuseZipMount
+filetype *.zip,*.jar,*.war,*.ear
+       \ {Mount with fuse-zip}
+       \ FUSE_MOUNT|fuse-zip %SOURCE_FILE %DESTINATION_DIR,
+       \ {View contents}
+       \ zip -sf %c | less,
+       \ tar -xf %c,
+fileviewer *.zip,*.jar,*.war,*.ear zip -sf %c
+
+" ArchiveMount
+filetype *.tar.bz2,*.tbz2,*.tgz,*.tar.gz
+       \ {Mount with archivemount}
+       \ FUSE_MOUNT|archivemount %SOURCE_FILE %DESTINATION_DIR,
+fileviewer *.tgz,*.tar.gz tar -tzf %c
+fileviewer *.tar.bz2,*.tbz2 tar -tjf %c
+
+" Rar2FsMount
+filetype *.rar
+       \ {Mount with rar2fs}
+       \ FUSE_MOUNT|rar2fs %SOURCE_FILE %DESTINATION_DIR,
+
+" IsoMount
+filetype *.iso
+       \ {Mount with fuseiso}
+       \ FUSE_MOUNT|fuseiso %SOURCE_FILE %DESTINATION_DIR,
+
+" SshMount
+filetype *.ssh
+       \ {Mount with sshfs}
+       \ FUSE_MOUNT2|sshfs %PARAM %DESTINATION_DIR,
+
+" FtpMount
+filetype *.ftp
+       \ {Mount with curlftpfs}
+       \ FUSE_MOUNT2|curlftpfs -o ftp_port=-,,disable_eprt %PARAM %DESTINATION_DIR,
+
+" Fuse7z
+filetype *.7z
+       \ {Mount with fuse-7z}
+       \ FUSE_MOUNT|fuse-7z %SOURCE_FILE %DESTINATION_DIR,
+
+" Office files
+filextype *.doc,*.docx,*.xls,*.xlsx libreoffice %f &
+fileview *.docx, docx2txt.pl %f -
+
+" Qt projects
+filextype *.pro qtcreator %f &
+
+" Directories
+filextype */
+        \ {View in thunar}
+        \ Thunar %f &,
+fileview .*/,*/ tree %f
+
