@@ -1,0 +1,34 @@
+//repo change 
+copy  /usr/share/xbps.d/00-repository-main.conf to /etc/xbps.d
+change the mirrors
+
+//wifi-connect
+sudo ip link set wlp5s0 up
+sudo wpa_passphrase "ssid" "password" >> /etc/wpa_supplicant/wpa_supplicant-wlp5s0.conf
+sudo ln -s /etc/sv/wpa_supplicant/ /var/service/
+ping some site if unreachable run
+sudo wpa_supplicant -B -i wlp5s0 -c /etc/wpa_supplicant/wpa_supplicant-wlp5s0.conf
+
+//full sys update
+sudo xbps-install -Syu
+
+//install pkgs
+sudo xbps-install xorg-minimal xorg-fonts xprop xrdb xsel xset xsetroot xsettingsd xtitle xf86-input-synaptics xf86-video-intel xdo brightnessctl pulseeffects pulseaudio alsa-plugins-pulseaudio pulsemixer noto-fonts-ttf pcmanfm gvfs gvfs-mtp gtk-engine-murrine android-tools android-udev-rules bspwm picom sxhkd i3lock dmenu polybar feh gcc libX11-devel libXft-devel arc-theme arc-icon-theme lxappearance  breeze-obsidian-cursor-theme pkg-config
+
+//connect android device 
+add the required name-of-user to adbusers group  
+echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="vendor-id", MODE="0666", OWNER="name-of-user"' > /usr/lib/udev/rules.d/51-android.rules
+
+//start some services and xinit
+start polkitd and dbus services
+echo 'exec dbus-run-session wm-name' > ~/.xinitrc
+echo 'exec startx' > ~/.bash_profile
+sudo usermod -a -G storage z
+
+//automount usb in pcmanfm
+edit /usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy (:%s/foo/bar/g)
+
+//mouse
+save 70-synaptics.conf as 30-synaptics.conf in /usr/share/X11/xorg.conf.d/ and disable touchpad in 40-libinput.conf
+edit /etc/default/grub GRUB_CMDLINE_LINUX_DEFAULT="loglevel=4 psmouse.synaptics_intertouch=0"
+
