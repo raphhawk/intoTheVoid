@@ -1,0 +1,43 @@
+#############################################################################
+#
+# -->Add these lines to your .Xdefaults/.Xresources for extension to work:--
+#
+#
+# URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+# URxvt.iso14755: False
+# URxvt.perl-ext-common: default,clipboard
+#
+# -->now save this extension in /usr/lib/urxvt/perl/clipboard
+# -->this extension requires "xclip" to work.please download it from your 
+# -->distribution's repos.
+# --> Use Ctrl+Shift+V to paste the text in urxvt.
+# --> To copy the text from urxvt just select it with mouse and it will be
+# --> copied to the clipboard, use Ctrl+V to paste the text elsewhere.
+#
+#                   -Credit goes to Original Author
+############################################################################
+ 
+ 
+ 
+#! perl
+ 
+sub on_sel_grab {
+    my $query = $_[0]->selection;
+    open (my $pipe,'| /usr/bin/xclip -in -selection clipboard') or die;
+    print $pipe $query;
+    close $pipe;
+}
+ 
+sub paste {
+    my ($self) = @_;
+    my $content = `/usr/bin/xclip -loop 1 -out -selection clipboard` ;
+    $self->tt_write ($content);
+}
+ 
+sub on_user_command {
+    my ($self, $cmd) = @_;
+    if ($cmd eq "clipboard:paste") {
+        $self->paste;
+    }
+}
+ 

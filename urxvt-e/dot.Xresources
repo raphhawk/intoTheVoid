@@ -1,0 +1,73 @@
+! special
+*.foreground:   #ecf0c1
+*.background:   #0f111b
+*.cursorColor:  #ecf0c1
+
+! black
+*.color0:       #000000
+*.color8:       #686f9a
+
+! red
+*.color1:       #e33400
+*.color9:       #e33400
+
+! green
+*.color2:       #5ccc96
+*.color10:      #5ccc96
+
+! yellow
+*.color3:       #b3a1e6
+*.color11:      #b3a1e6
+
+! blue
+*.color4:       #00a3cc
+*.color12:      #00a3cc
+
+! magenta
+*.color5:       #f2ce00
+*.color13:      #f2ce00
+
+! cyan
+*.color6:       #7a5ccc
+*.color14:      #7a5ccc
+
+! white
+*.color7:       #686f9a
+*.color15:      #f0f1ce
+URxvt.font:		xft:Noto Sans Mono:pixelsize=16:antialias=true:hinting=true
+URxvt.boldFont:		xft:Noto Sans Mono:bold:pixelsize=16:antialias=true:hinting=true
+
+URxvt.scrollBar:	false
+URxvt.saveLines:	65535
+
+URxvt.perl-ext-common:  default,clipboard
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+
+!URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+!URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.keysym.C-Shift-Up: command:\033]720;1\007
+URxvt.keysym.C-Shift-Down: command:\033]721;1\007
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+Xft*dpi:       96
+Xft*antialias: True
+Xft*hinting:   Full
+
+URxvt.keysym.KP_Add:    +
+URxvt.keysym.KP_Subtract: -
+URxvt.keysym.KP_Multiply: *
+URxvt.keysym.KP_Divide  : /
+URxvt.keysym.KP_Decimal : .
+URxvt.keysym.KP_Separator : ,
+URxvt.keysym.KP_1:      1
+URxvt.keysym.KP_2:      2
+URxvt.keysym.KP_3:      3
+URxvt.keysym.KP_4:      4
+URxvt.keysym.KP_5:      5
+URxvt.keysym.KP_6:      6
+URxvt.keysym.KP_7:      7
+URxvt.keysym.KP_8:      8
+URxvt.keysym.KP_9:      9
+URxvt.keysym.KP_0:      0
