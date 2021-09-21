@@ -1,0 +1,1 @@
+for i in *.mp4; do ffmpeg -i "$i" -vcodec libx265 -crf 28 cnvrt/"${i%.*}.mp4";done
