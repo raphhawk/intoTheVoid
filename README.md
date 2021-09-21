@@ -38,6 +38,10 @@
   colorschemes/lightline/language_support at dotFiles/dot.vim
 
 ## Terminals
+### urxvt
+  urxvt config at urxvt-e/dot.Xresources and autoloads with bspwm config
+  clipboard xclip support at urxvt-e/clipboard
+  disable bell at dotFiles/dot.inputrc
 ### xterm
   xterm config at dotFiles/dot.Xresources and autoloads with bspwm config
 ### st
