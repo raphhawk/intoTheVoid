@@ -1,17 +1,21 @@
 ## mount devices
 ## install packages
-... pacstrap -i /mnt base base-devel cryptsetup device-mapper dhcpcd diffutils e2fsprogs inetutils jfsutils less linux linux-firmware logrotate lvm2 man-db man-pages mdadm nano netctl perl reiserfsprogs s-nail sysfsutils texinfo usbutils vi which xfsprogs
-genfstab -U -p /mnt >>/mnt/etc/fstab
-arch-chroot /mnt /bin/bash
-nano /etc/locale.gen ....
+```pacstrap -i /mnt base base-devel cryptsetup device-mapper dhcpcd diffutils e2fsprogs inetutils jfsutils less linux linux-firmware logrotate lvm2 man-db man-pages mdadm nano netctl perl reiserfsprogs s-nail sysfsutils texinfo usbutils vi which xfsprogs```
+## Generate fstab
+```genfstab -U -p /mnt >>/mnt/etc/fstab```
+## chroot into mnt
+```arch-chroot /mnt /bin/bash```
+## set locale, host, clock
+```nano /etc/locale.gen ....```
 	(un# en_US.UTF8 UTF8)
-locale-gen
-ln -sf /usr/share/zoneinfo/Asia/Kolkatta /etc/localtime
+```locale-gen
+ln -sf /usr/share/zoneinfo/Asia/Kolkatta /etc/localtime```
 hwclock --systohc --utc
 echo %hostname% > /etc/hostname
-nano /etc/hosts
+nano /etc/hosts```
 	127.0.1.1 localhost.localdomain %hostname%
-pacman -S dialog wpa_supplicant wireless_tools 
+	
+```pacman -S dialog wpa_supplicant wireless_tools``` 
 passwd 
 pacman -S grub efibootmgr
 mkdir /boot/efi
