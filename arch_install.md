@@ -1,8 +1,9 @@
-mount deives
-pacstrap -i /mnt base base-devel cryptsetup device-mapper dhcpcd diffutils e2fsprogs inetutils jfsutils less linux linux-firmware logrotate lvm2 man-db man-pages mdadm nano netctl perl reiserfsprogs s-nail sysfsutils texinfo usbutils vi which xfsprogs
+## mount devices
+## install packages
+... pacstrap -i /mnt base base-devel cryptsetup device-mapper dhcpcd diffutils e2fsprogs inetutils jfsutils less linux linux-firmware logrotate lvm2 man-db man-pages mdadm nano netctl perl reiserfsprogs s-nail sysfsutils texinfo usbutils vi which xfsprogs
 genfstab -U -p /mnt >>/mnt/etc/fstab
 arch-chroot /mnt /bin/bash
-nano /etc/locale.gen 
+nano /etc/locale.gen ....
 	(un# en_US.UTF8 UTF8)
 locale-gen
 ln -sf /usr/share/zoneinfo/Asia/Kolkatta /etc/localtime
