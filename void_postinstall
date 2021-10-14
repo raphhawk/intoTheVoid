@@ -10,6 +10,8 @@ ping some site if unreachable run
 sudo wpa_supplicant -B -i wlp5s0 -c /etc/wpa_supplicant/wpa_supplicant-wlp5s0.conf
 
 //full sys update
+//For ssl errors
+SSL_NO_VERIFY_PEER=true xbps-install -Syu
 sudo xbps-install -Syu
 
 //install pkgs
