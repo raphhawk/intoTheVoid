@@ -1,0 +1,44 @@
+#Mount drives:
+$ mount /dev/sdX /mnt #(ext4)
+$ mount /dev/sdY /mnt/home #(ext4)
+$ /dev/sdZ /mnt/boot/efi #(vfat) (optional for now)
+$ swapon /dev/sdS #(swap) (optional)
+
+#Start Network:
+$ setup-interface
+    Use eth0 or usb0 (recommended)
+$ /etc/init.d/networking start
+ change mirrors eg. http://mirrors.nju.edu.cn/alpine/latest-stable/main 
+
+#Setup EFI:
+$ set BOOTLOADER=grub
+$ set USE_EFI=1
+$ apk add efibootmgr grub-efi
+$ setup-disk /mnt
+
+#Install grub
+$ mount --rbind /dev  /mnt/dev
+$ mount --rbind /proc /mnt/proc
+$ mount --rbind /sys  /mnt/sys
+$ chroot /mnt /bin/ash -l 
+
+Make shure /dev/sdZ is mounted.
+$ grub-install --target=x86_64-efi --bootloader-id=grub --efi-directory=/boot/efi
+reboot
+
+#Alpine Post Install
+$ apk add bash bash-completion dbus polkit acpid lightdm lightdm-gtk-greeter xf86-input-synaptics xf86-video-intel sudo pulseaudio pulseaudio-alsa alsa-plugins-pulseaudio bspwm sxhkd i3lock picom dmenu feh pulsemixer polybar firefox papirus-icon-theme libuser alacritty
+
+$ adduser username
+$ lchsh #change shell for current user
+$ setup-xorg-base
+
+$ /etc/init.d/dbus start
+$ dbus-uuidgen > /var/lib/dbus/machine-id
+$ rc-update add dbus
+$ /etc/init.d/polkit start
+$ rc-update add polkit
+$ /etc/init.d/acpid start
+$ rc-update add acpid
+$ /etc/init.d/lightdm start
+$ rc-update add lightdm
