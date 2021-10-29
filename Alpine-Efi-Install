@@ -1,10 +1,10 @@
-#Format and mount drives
+# Format and mount drives
 	$ mount /dev/sdX /mnt # root partition ext4
 	$ mkdir /mnt/boot (do not mount vfat for now)
 	$ mkdir /mnt/home
 	$ mount /dev/sdY /mnt/home # home partition ext4 (swap will be done in the end)
 
-#Setup
+# Setup
 	$ setup-interface && /etc/init.d/networking start 
 	# change mirrors in /etc/apk/repositories add http://mirrors.nju.edu.cn/alpine/edge/main/
 	$ setup-hostname
@@ -12,7 +12,7 @@
 	$ setup-timezone
 	$ setup-ntp
 
-#Setup EFI and install
+# Setup EFI and install
 	$ set BOOTLOADER=grub
 	$ set USE_EFI=1
 	$ apk add grub-efi efibootmgr
@@ -24,14 +24,14 @@
 	$ chroot /mnt /bin/ash -l
 	$ grub-install --target=x86_64-efi --bootloader-id=grub --efi-directory=/boot/efi
 
-	##setup-swap
+	# setup-swap
 		$ mkswap /dev/sdaA
 		$ echo -e "/dev/sda2 none swap sw 0 0" >> /mnt/etc/fstab
 		$ swapon /dev/sda2 (or rc-service swap start)
 		$ free -m #check swap
 	$ poweroff
 
-##Alpine post install
+# Alpine post install
 	login as root
 	$ passwd
 	$ apk add libuser vim sudo bash bash-completion
@@ -48,5 +48,5 @@
 	Setup configs 
 	$ startx
 
-#For android and drives automount, check void post install notes
+# For android and drives automount, check void post install notes
 
