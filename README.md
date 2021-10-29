@@ -5,6 +5,8 @@
 ## Confs list:
 
 ## Distros
+### Alpine
+  complete install procedure ar alpine-Efi-install
 ### Void
   post install procedure at void_postinstall
 ### Arch
