@@ -6,7 +6,7 @@
 
 ## Distros
 ### Alpine
-  complete install procedure ar alpine-Efi-install
+  complete install procedure ar Alpine-Efi-Install
 ### Void
   post install procedure at void_postinstall
 ### Arch
