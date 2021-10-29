@@ -1,44 +1,52 @@
-#Mount drives:
-$ mount /dev/sdX /mnt #(ext4)
-$ mount /dev/sdY /mnt/home #(ext4)
-$ /dev/sdZ /mnt/boot/efi #(vfat) (optional for now)
-$ swapon /dev/sdS #(swap) (optional)
+#Format and mount drives
+	$ mount /dev/sdX /mnt # root partition ext4
+	$ mkdir /mnt/boot (do not mount vfat for now)
+	$ mkdir /mnt/home
+	$ mount /dev/sdY /mnt/home # home partition ext4 (swap will be done in the end)
 
-#Start Network:
-$ setup-interface
-    Use eth0 or usb0 (recommended)
-$ /etc/init.d/networking start
- change mirrors eg. http://mirrors.nju.edu.cn/alpine/latest-stable/main 
+#Setup
+	$ setup-interface && /etc/init.d/networking start 
+	# change mirrors in /etc/apk/repositories add http://mirrors.nju.edu.cn/alpine/edge/main/
+	$ setup-hostname
+	$ setup-keymap
+	$ setup-timezone
+	$ setup-ntp
 
-#Setup EFI:
-$ set BOOTLOADER=grub
-$ set USE_EFI=1
-$ apk add efibootmgr grub-efi
-$ setup-disk /mnt
+#Setup EFI and install
+	$ set BOOTLOADER=grub
+	$ set USE_EFI=1
+	$ apk add grub-efi efibootmgr
+	$ setup-disk /mnt
+	$ mount --rbind /dev /mnt/dev
+	$ mount --rbind /proc /mnt/proc
+	$ mount --rbind /sys /mnt/sys
+	$ mount /dev/sdZ /mnt/boot/efi # efi partition vfat
+	$ chroot /mnt /bin/ash -l
+	$ grub-install --target=x86_64-efi --bootloader-id=grub --efi-directory=/boot/efi
 
-#Install grub
-$ mount --rbind /dev  /mnt/dev
-$ mount --rbind /proc /mnt/proc
-$ mount --rbind /sys  /mnt/sys
-$ chroot /mnt /bin/ash -l 
+	##setup-swap
+		$ mkswap /dev/sdaA
+		$ echo -e "/dev/sda2 none swap sw 0 0" >> /mnt/etc/fstab
+		$ swapon /dev/sda2 (or rc-service swap start)
+		$ free -m #check swap
+	$ poweroff
 
-Make shure /dev/sdZ is mounted.
-$ grub-install --target=x86_64-efi --bootloader-id=grub --efi-directory=/boot/efi
-reboot
+##Alpine post install
+	login as root
+	$ passwd
+	$ apk add libuser vim sudo bash bash-completion
+	$ lchsh # /bin/bash
+	$ adduser $name
+	$ adduser $name video
+	$ adduser $name audio
+	$ adduser $name disk
+	$ adduser $name users
+	
+	$ sudo apk add dbus polkit acpid xf86-input-synaptics xf86-video-intel pulseaudio pulseaudio-alsa alsa-plugins-pulse pulsemixer bspwm sxhkd i3lock picom dmenu feh polybar arc-theme papirus-icon-theme alacritty font-noto pcmanfm lxmenu-data
+	$ sudo setup-xorg-base
+	
+	Setup configs 
+	$ startx
 
-#Alpine Post Install
-$ apk add bash bash-completion dbus polkit acpid lightdm lightdm-gtk-greeter xf86-input-synaptics xf86-video-intel sudo pulseaudio pulseaudio-alsa alsa-plugins-pulseaudio bspwm sxhkd i3lock picom dmenu feh pulsemixer polybar firefox papirus-icon-theme libuser alacritty
+#For android and drives automount, check void post install notes
 
-$ adduser username
-$ lchsh #change shell for current user
-$ setup-xorg-base
-
-$ /etc/init.d/dbus start
-$ dbus-uuidgen > /var/lib/dbus/machine-id
-$ rc-update add dbus
-$ /etc/init.d/polkit start
-$ rc-update add polkit
-$ /etc/init.d/acpid start
-$ rc-update add acpid
-$ /etc/init.d/lightdm start
-$ rc-update add lightdm
