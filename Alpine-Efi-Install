@@ -1,9 +1,3 @@
-# Format and mount drives
-	$ mount /dev/sdX /mnt # root partition ext4
-	$ mkdir /mnt/boot (do not mount vfat for now)
-	$ mkdir /mnt/home
-	$ mount /dev/sdY /mnt/home # home partition ext4 (swap will be done in the end)
-
 # Setup
 	$ setup-interface && /etc/init.d/networking start 
 	# change mirrors in /etc/apk/repositories add http://mirrors.nju.edu.cn/alpine/edge/main/
@@ -11,6 +5,12 @@
 	$ setup-keymap
 	$ setup-timezone
 	$ setup-ntp
+	
+# Format and mount drives
+	$ mount /dev/sdX /mnt # root partition ext4
+	$ mkdir /mnt/boot (do not mount vfat for now)
+	$ mkdir /mnt/home
+	$ mount /dev/sdY /mnt/home # home partition ext4 (swap will be done in the end)
 
 # Setup EFI and install
 	$ set BOOTLOADER=grub
@@ -28,6 +28,7 @@
 		$ mkswap /dev/sdaA
 		$ echo -e "/dev/sda2 none swap sw 0 0" >> /mnt/etc/fstab
 		$ swapon /dev/sda2 (or rc-service swap start)
+		$ rc-update add swap
 		$ free -m #check swap
 	$ poweroff
 
@@ -37,6 +38,7 @@
 	$ apk add libuser vim sudo bash bash-completion
 	$ lchsh # /bin/bash
 	$ adduser $name
+	$ adduser $name input
 	$ adduser $name video
 	$ adduser $name audio
 	$ adduser $name disk
