@@ -1,0 +1,107 @@
+{
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.colorTheme": "spaceduck",
+  "workbench.iconTheme": null,
+  "editor.fontFamily": "'Noto Sans Mono', 'monospace', monospace",
+  "go.toolsManagement.autoUpdate": true,
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "notebook.formatOnSave.enabled": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "vim.smartRelativeLine": true,
+  "editor.occurrencesHighlight": false,
+  "editor.selectionHighlight": false,
+  "editor.cursorSurroundingLines": 8,
+  "editor.autoClosingBrackets": "never",
+  "zenMode.hideStatusBar": false,
+  "zenMode.centerLayout": false,
+  "explorer.autoReveal": true,
+  "editor.scrollbar.vertical": "hidden",
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.hideCursorInOverviewRuler": false,
+  "editor.overviewRulerBorder": true,
+  "editor.cursorBlinking": "solid",
+  "editor.cursorStyle": "block",
+  "editor.folding": false,
+  "workbench.tree.indent": 20,
+  "vim.statusBarColorControl": false,
+  "vim.statusBarColors": {
+    "normal": "#22242e",
+    "insert": "#636e63",
+    "visual": "#268bd2",
+    "visualline": "#2aa198",
+    "visualblock": "#859900",
+    "replace": "#b58900"
+  },
+  "vim.normalModeKeyBindings": [
+    {
+      "before": ["<leader>", "t", "t"],
+      "commands": [
+        "workbench.view.explorer",
+        "workbench.action.maximizeEditorGroup"
+      ]
+    },
+    {
+      "before": ["<leader>", "t", "r"],
+      "commands": ["workbench.action.toggleMaximizedPanel"],
+      "when": "!terminalFocus"
+    },
+    {
+      "after": ["alt", "t", "r"],
+      "command": "workbench.action.closePanel",
+      "when": "terminalFocus"
+    },
+    {
+      "before": ["<leader>", "z", "z"],
+      "commands": ["workbench.action.toggleZenMode"]
+    },
+    {
+      "before": ["<leader>", "e", "e"],
+      "commands": ["editor.action.showHover"],
+      "when": "editorTextFocus"
+    },
+    {
+      "before": ["<leader>", "f", "f"],
+      "commands": ["workbench.action.quickOpen"],
+      "when": "editorTextFocus"
+    },
+    {
+      "before": ["<leader>", "w", "w"],
+      "commands": ["workbench.action.toggleActivityBarVisibility"],
+      "when": "editorTextFocus"
+    }
+  ],
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "none",
+  "editor.lightbulb.enabled": false,
+  "editor.autoClosingQuotes": "never",
+  "[go]": {
+    "editor.defaultFormatter": "golang.go"
+  },
+  "workbench.preferredDarkColorTheme": "Tokyo Night",
+  "workbench.tips.enabled": false,
+  "window.menuBarVisibility": "toggle",
+  "breadcrumbs.enabled": false,
+  "editor.renderLineHighlight": "none",
+  "window.autoDetectHighContrast": false,
+  "workbench.editor.enablePreview": false,
+  "editor.minimap.enabled": false,
+  "zenMode.showTabs": "none",
+  "workbench.editor.tabCloseButton": "off",
+  "workbench.editor.tabSizing": "shrink",
+  "files.associations": {
+    "*.gohtml": "gohtml",
+    "*.gohtmltmpl": "go-template"
+  },
+  "[gotmpl]": {
+    "editor.defaultFormatter": "golang.go"
+  },
+  "[proto3]": {
+    "editor.defaultFormatter": "zxh404.vscode-proto3"
+  },
+  "editor.linkedEditing": true,
+  "[sql]": {
+    "editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode"
+  },
+  "window.density.editorTabHeight": "compact"
+}
